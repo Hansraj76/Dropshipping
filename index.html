@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalCart - Premium Dropshipping Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #f59e0b;
+        }
+        
+        /* Custom animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        
+        /* Product card hover effect */
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* Cart badge */
+        .cart-badge {
+            top: -8px;
+            right: -8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header/Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-bold text-indigo-600 flex items-center">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/454c9d8d-1e8f-4f23-b3c4-3b9669271e8b.png" alt="GlobalCart logo - stylized shopping cart icon with globe design" class="mr-2">
+                    GlobalCart
+                </a>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Home</a>
+                <a href="#products" class="text-gray-700 hover:text-indigo-600 font-medium">Shop</a>
+                <a href="#" class="text-gray-700 hover:text-indigo-600 font-medium">Categories</a>
+                <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium">About</a>
+                <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium">Contact</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button class="p-2 text-gray-600 hover:text-indigo-600 relative">
+                    <i class="fas fa-search text-xl"></i>
+                </button>
+                <button class="p-2 text-gray-600 hover:text-indigo-600 relative">
+                    <i class="fas fa-user text-xl"></i>
+                </button>
+                <button id="cart-btn" class="p-2 text-gray-600 hover:text-indigo-600 relative">
+                    <i class="fas fa-shopping-cart text-xl"></i>
+                    <span id="cart-count" class="cart-badge absolute bg-indigo-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full hidden">0</span>
+                </button>
+                <button class="md:hidden p-2 text-gray-600 hover:text-indigo-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-16">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0 animate-fade-in">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">Quality Products At Your Doorstep</h1>
+                <p class="text-xl mb-6">Discover the latest trends with our curated collection of dropshipped products delivered straight to you.</p>
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                    <a href="#products" class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 text-center shadow-md">Shop Now</a>
+                    <a href="#" class="border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-indigo-600 text-center transition-all">Learn More</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 animate-fade-in delay-100">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8f206590-9546-4430-85aa-171a440f1fbf.png" alt="Happy customer unboxing a package with various products delivered from online shopping" class="rounded-lg shadow-xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6 rounded-lg animate-fade-in">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shipping-fast text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Worldwide Shipping</h3>
+                    <p class="text-gray-600">Fast and reliable shipping to over 100 countries.</p>
+                </div>
+                <div class="text-center p-6 rounded-lg animate-fade-in delay-100">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-hand-holding-usd text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Money Back Guarantee</h3>
+                    <p class="text-gray-600">30-day return policy for your peace of mind.</p>
+                </div>
+                <div class="text-center p-6 rounded-lg animate-fade-in delay-200">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-headset text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">24/7 Support</h3>
+                    <p class="text-gray-600">Our team is always here to help you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Trending Products</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Browse our most popular products this season</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Product 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm product-card">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/71436180-4ce5-4caa-b824-a076e58e6c13.png" alt="Modern wireless headphones with noise cancellation in matte black finish sitting on a wooden surface" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2">
+                            <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center text-gray-600 hover:text-indigo-600 shadow-sm">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center mb-1">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm">4.5</span>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-1">Wireless Headphones Pro</h3>
+                        <p class="text-gray-600 text-sm mb-3">Premium sound quality with active noise cancellation</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">$129.99</span>
+                            <button class="add-to-cart bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 transition-colors" data-id="1" data-name="Wireless Headphones Pro" data-price="129.99">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm product-card">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/50b3be8a-ecf8-40ac-a0d1-ec7ef8d2006e.png" alt="Smart fitness tracker with adjustable black strap showing heart rate monitoring on digital display" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2">
+                            <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center text-gray-600 hover:text-indigo-600 shadow-sm">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center mb-1">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm">4.0</span>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-1">Smart Fitness Tracker</h3>
+                        <p class="text-gray-600 text-sm mb-3">Monitor your health metrics in real time</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">$79.99</span>
+                            <button class="add-to-cart bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 transition-colors" data-id="2" data-name="Smart Fitness Tracker" data-price="79.99">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm product-card">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ffb02375-c6b1-41ae-8390-576dc1d70a89.png" alt="Portable blender bottle in turquoise color with measuring cup and ingredients for smoothie preparation" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2">
+                            <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center text-gray-600 hover:text-indigo-600 shadow-sm">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center mb-1">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm">5.0</span>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-1">Portable Blender Bottle</h3>
+                        <p class="text-gray-600 text-sm mb-3">Perfect smoothies anytime, anywhere</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">$34.99</span>
+                            <button class="add-to-cart bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 transition-colors" data-id="3" data-name="Portable Blender Bottle" data-price="34.99">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-sm product-card">
+                    <div class="relative">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cf447c12-365c-42db-b8a8-96b99be166dc.png" alt="Minimalist leather wallet with multiple card slots and money compartment shown in natural brown color" class="w-full h-64 object-cover">
+                        <div class="absolute top-2 right-2">
+                            <button class="bg-white rounded-full w-8 h-8 flex items-center justify-center text-gray-600 hover:text-indigo-600 shadow-sm">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center mb-1">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm">4.5</span>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-1">Minimalist Leather Wallet</h3>
+                        <p class="text-gray-600 text-sm mb-3">Sleek design with RFID protection</p>
+                        <div class="flex justify-between items-center">
+                            <span class="font-bold text-lg">$49.99</span>
+                            <button class="add-to-cart bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 transition-colors" data-id="4" data-name="Minimalist Leather Wallet" data-price="49.99">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block border-2 border-indigo-600 text-indigo-600 px-6 py-2 rounded-lg font-medium hover:bg-indigo-600 hover:text-white transition-colors">
+                    View All Products
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offer Banner -->
+    <section class="py-12 bg-indigo-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Summer Sale! Up to 50% Off</h2>
+            <p class="text-xl mb-6 max-w-3xl mx-auto">Shop now and enjoy massive discounts on selected items. Limited time offer.</p>
+            <a href="#" class="inline-block bg-white text-indigo-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 shadow-md">
+                Shop The Sale
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c997f34c-f1a3-4b85-a08b-f3985072d704.png" alt="Happy team of e-commerce professionals working together in a modern office with laptops and planning boards" class="rounded-lg shadow-lg">
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6">About GlobalCart</h2>
+                    <p class="text-gray-600 mb-4">Founded in 2022, GlobalCart is a premier dropshipping marketplace connecting customers with high-quality products from around the world. We carefully vet all our suppliers to ensure you receive only the best items without the hassle of inventory management.</p>
+                    <p class="text-gray-600 mb-6">Our mission is to simplify online shopping by providing a seamless experience from browsing to delivery, all while maintaining competitive prices and excellent customer service.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-check text-indigo-600"></i>
+                            </div>
+                            <span>10,000+ Happy Customers</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-check text-indigo-600"></i>
+                            </div>
+                            <span>500+ Trusted Suppliers</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-check text-indigo-600"></i>
+                            </div>
+                            <span>Fast Worldwide Shipping</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">What Our Customers Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Don't just take our word for it - hear from our satisfied customers</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm">
+                    <div class="flex mb-4">
+                        <div class="flex text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"The wireless headphones I ordered arrived in just 3 days and the sound quality is amazing. I'll definitely be purchasing from GlobalCart again!"</p>
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/84c2a5b0-eba2-4b1b-af66-9bc0cb7030c0.png" alt="Headshot of satisfied customer Sarah J. with short blonde hair smiling at the camera" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Sarah J.</h4>
+                            <p class="text-gray-500 text-sm">Verified Customer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm">
+                    <div class="flex mb-4">
+                        <div class="flex text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"As someone who's skeptical about online shopping, GlobalCart has completely changed my mind. Their customer service is top-notch and products exactly as described."</p>
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/29d8ca1d-4375-409c-ac95-b78bb6880606.png" alt="Headshot of happy customer David T. with glasses and beard looking professional" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">David T.</h4>
+                            <p class="text-gray-500 text-sm">Verified Customer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm">
+                    <div class="flex mb-4">
+                        <div class="flex text-yellow-400 mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"The minimalist wallet is exactly what I was looking for. Slim design but holds everything I need. Arrived earlier than expected too!"</p>
+                    <div class="flex items-center">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/349e48dd-99f6-4227-b9e7-6b00fed6fa9c.png" alt="Headshot of content customer Mia K. with long brown hair laughing happily" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Mia K.</h4>
+                            <p class="text-gray-500 text-sm">Verified Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="bg-indigo-50 rounded-lg p-8 md:p-12 text-center max-w-4xl mx-auto">
+                <h2 class="text-2xl font-bold mb-2">Subscribe to Our Newsletter</h2>
+                <p class="text-gray-600 mb-6">Get exclusive offers, product updates, and shopping tips delivered to your inbox.</p>
+                <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                    <input type="email" placeholder="Your email address" class="flex-grow px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors font-medium">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">GlobalCart</h3>
+                    <p class="text-gray-400 mb-4">Your trusted dropshipping partner for quality products worldwide.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Shop</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Customer Service</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Shipping Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Return Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div id="contact">
+                    <h4 class="font-semibold mb-4">Contact Us</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center"><i class="fas fa-map-marker-alt mr-3"></i> 123 Commerce St, San Francisco, CA</li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt mr-3"></i> (555) 123-4567</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-3"></i> hello@globalcart.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2023 GlobalCart. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/938aced0-3ad1-4d9b-9993-0fdde9417b72.png" alt="Visa payment method logo">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/084ea67f-e8dd-4684-a863-61ef8bec6800.png" alt="Mastercard payment method logo">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2ca1e608-072d-4d6f-a5ef-93d3620cfe4c.png" alt="PayPal payment method logo">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7445cf7b-786e-4870-a4a6-738d45781d20.png" alt="Apple Pay payment method logo">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="absolute right-0 top-0 h-full bg-white w-full max-w-md shadow-lg overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Your Cart (<span id="modal-cart-count">0</span>)</h3>
+                    <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <div id="cart-items" class="space-y-4">
+                    <!-- Cart items will be dynamically inserted here -->
+                    <div class="text-center py-12 text-gray-500" id="empty-cart-message">
+                        <i class="fas fa-shopping-cart text-5xl mb-4 text-gray-300"></i>
+                        <p class="text-lg">Your cart is empty</p>
+                        <a href="#products" class="text-indigo-600 hover:underline mt-2 inline-block">Continue shopping</a>
+                    </div>
+                </div>
+                
+                <div id="cart-summary" class="mt-8 border-t border-gray-200 pt-6 hidden">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600">Subtotal</span>
+                        <span id="cart-subtotal" class="font-medium">$0.00</span>
+                    </div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-600">Shipping</span>
+                        <span class="font-medium">Calculated at checkout</span>
+                    </div>
+                    <div class="flex justify-between mb-6 text-lg">
+                        <span>Total</span>
+                        <span id="cart-total" class="font-bold">$0.00</span>
+                    </div>
+                    <button class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition-colors font-medium">
+                        Proceed to Checkout
+                    </button>
+                    <a href="#products" class="block text-center text-indigo-600 mt-4 hover:underline">Continue shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Shopping Cart Functionality
+        let cart = [];
+        
+        // Cart Functions
+        function addToCart(productId, productName, productPrice) {
+            // Check if product is already in cart
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    name: productName,
+                    price: parseFloat(productPrice),
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+        }
+        
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+        
+        function updateQuantity(productId, newQuantity) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity = parseInt(newQuantity);
+                if (item.quantity < 1) {
+                    removeFromCart(productId);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+        
+        function updateCart() {
+            // Update cart count in header
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCount = document.getElementById('cart-count');
+            const modalCartCount = document.getElementById('modal-cart-count');
+            
+            if (totalItems > 0) {
+                cartCount.textContent = totalItems;
+                cartCount.classList.remove('hidden');
+                modalCartCount.textContent = totalItems;
+                document.getElementById('cart-summary').classList.remove('hidden');
+                document.getElementById('empty-cart-message').classList.add('hidden');
+            } else {
+                cartCount.classList.add('hidden');
+                modalCartCount.textContent = '0';
+                document.getElementById('cart-summary').classList.add('hidden');
+                document.getElementById('empty-cart-message').classList.remove('hidden');
+            }
+            
+            // Update cart items in modal
+            const cartItemsEl = document.getElementById('cart-items');
+            cartItemsEl.innerHTML = '';
+            
+            // Re-add empty message if no items
+            if (totalItems === 0) {
+                cartItemsEl.appendChild(document.getElementById('empty-cart-message').cloneNode(true));
+            } else {
+                // Calculate subtotal
+                let subtotal = 0;
+                
+                // Add each item to modal
+                cart.forEach(item => {
+                    subtotal += item.price * item.quantity;
+                    
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex justify-between items-start border-b border-gray-100 pb-4';
+                    itemEl.innerHTML = `
+                        <div class="flex">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/61dd8c8e-d0b8-4b4b-b603-7505f9967045.png" alt="${item.name} product thumbnail" class="w-16 h-16 rounded-lg object-cover mr-4">
+                            <div>
+                                <h4 class="font-medium">${item.name}</h4>
+                                <p class="text-gray-600 text-sm">$${item.price.toFixed(2)}</p>
+                                <button class="remove-item text-red-500 text-xs hover:underline mt-1" data-id="${item.id}">Remove</button>
+                            </div>
+                        </div>
+                        <div class="flex items-center border border-gray-200 rounded-lg px-2">
+                            <button class="decrement text-gray-500 px-2 py-1" data-id="${item.id}">-</button>
+                            <input type="number" value="${item.quantity}" min="1" class="quantity w-10 text-center border-0 py-1" data-id="${item.id}">
+                            <button class="increment text-gray-500 px-2 py-1" data-id="${item.id}">+</button>
+                        </div>
+                    `;
+                    cartItemsEl.appendChild(itemEl);
+                });
+                
+                // Update total and subtotal
+                document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+                document.getElementById('cart-total').textContent = `$${subtotal.toFixed(2)}`;
+                
+                // Add event listeners to all remove buttons
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        removeFromCart(e.target.dataset.id);
+                    });
+                });
+                
+                // Add event listeners to all increment buttons
+                document.querySelectorAll('.increment').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        updateQuantity(e.target.dataset.id, parseInt(e.target.parentElement.querySelector('.quantity').value) + 1);
+                    });
+                });
+                
+                // Add event listeners to all decrement buttons
+                document.querySelectorAll('.decrement').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        updateQuantity(e.target.dataset.id, parseInt(e.target.parentElement.querySelector('.quantity').value) - 1);
+                    });
+                });
+                
+                // Add event listeners to all quantity inputs
+                document.querySelectorAll('.quantity').forEach(input => {
+                    input.addEventListener('change', (e) => {
+                        updateQuantity(e.target.dataset.id, e.target.value);
+                    });
+                });
+            }
+        }
+        
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add to cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    addToCart(
+                        e.target.dataset.id,
+                        e.target.dataset.name,
+                        e.target.dataset.price
+                    );
+                    
+                    // Show success feedback (could be enhanced with a toast notification)
+                    const originalText = e.target.textContent;
+                    e.target.textContent = 'Added!';
+                    e.target.style.backgroundColor = '#10b981'; // Emerald green
+                    
+                    setTimeout(() => {
+                        e.target.textContent = originalText;
+                        e.target.style.backgroundColor = '#4f46e5'; // Original indigo
+                    }, 1500);
+                });
+            });
+            
+            // Cart button to show modal
+            document.getElementById('cart-btn').addEventListener('click', () => {
+                document.getElementById('cart-modal').classList.remove('hidden');
+            });
+            
+            // Close cart modal button
+            document.getElementById('close-cart').addEventListener('click', () => {
+                document.getElementById('cart-modal').classList.add('hidden');
+            });
+            
+            // Close modal when clicking outside
+            document.getElementById('cart-modal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('cart-modal')) {
+                    document.getElementById('cart-modal').classList.add('hidden');
+                }
+            });
+            
+            // Mobile menu toggle (placeholder - would need to be implemented)
+            document.querySelector('.md\\:hidden button').addEventListener('click', () => {
+                alert('Mobile menu would open here in a full implementation');
+            });
+        });
+    </script>
+</body>
+</html>
